@@ -122,11 +122,15 @@
 
 .menu-instructor-info > span {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 17px;
+  letter-spacing: 1px;
+  font-style: italic;
 }
 
 .menu-instructor-info > p {
   font-size: 12px;
+  letter-spacing: 1px;
+  font-style: italic;
 }
 
 .separator {
@@ -187,7 +191,6 @@
 
 /* Contenido */
 .content {
-  flex: 1;
   padding: 20px;
 }
 
@@ -267,6 +270,10 @@
   }
 
   .menu-continer-instructor {
+    display: flex;
+  }
+
+  .sidebar.collapsed .menu-continer-instructor {
     display: none;
   }
 

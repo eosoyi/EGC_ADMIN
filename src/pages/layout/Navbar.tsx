@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { FaAlignJustify, FaTimes, FaUser } from "react-icons/fa";
-import { FaChartSimple, FaRightToBracket, FaUserGroup } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { FaRightToBracket } from "react-icons/fa6";
+import { NavLink } from "react-router-dom";
+import { routes } from "../../router/routes";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -44,22 +45,12 @@ export const Navbar = () => {
           </div>
 
           <nav className="menu-items">
-            <Link
-              to="/dashboard"
-              className="menu-link"
-              onClick={() => setIsOpen(false)}
-            >
-              <FaChartSimple className="icon" />
-              <span className="text">Dashboard</span>
-            </Link>
-            <Link
-              to="/usuarios"
-              className="menu-link"
-              onClick={() => setIsOpen(false)}
-            >
-              <FaUserGroup className="icon" />
-              <span className="text">Usuarios</span>
-            </Link>
+            {routes.map((route) => (
+              <NavLink key={route.name} to={route.to} className="menu-link">
+                {route.icon}
+                <span className="text">{route.name}</span>
+              </NavLink>
+            ))}
           </nav>
         </div>
 

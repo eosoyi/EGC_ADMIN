@@ -2,6 +2,7 @@
 
 :root {
   --tasa-font: "TASA Explorer", sans-serif;
+  --page-color: #F9FAFB;
 }
 
 * {
@@ -9,6 +10,10 @@
   margin: 0;
   box-sizing: border-box;
   font-family: var(--tasa-font);
+}
+
+body {
+  background-color: var(--page-color);
 }
 
 /* Reset CSS para botones y inputs */
