@@ -191,13 +191,15 @@
 
 /* Contenido */
 .content {
-  padding: 20px;
+  padding: 30px 20px;
 }
 
 /* --- Desktop --- */
 @media screen and (min-width: 1024px) {
   .layout {
     flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .topbar {
@@ -209,6 +211,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    flex-shrink: 0;
     transform: none;
     opacity: 1;
     pointer-events: auto;
@@ -326,6 +329,8 @@
   /* Contenido ocupa resto del espacio */
   .content {
     flex: 1;
-    padding: 20px;
+    padding: 3rem;
+    height: 100vh;
+    overflow-y: auto;
   }
 }
