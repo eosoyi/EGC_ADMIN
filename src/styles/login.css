@@ -48,7 +48,10 @@
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  padding: 2rem 0;
+  padding: 2.2rem 0;
+  -webkit-animation: opacityAnimation 1s cubic-bezier(0.39, 0.575, 0.565, 1)
+    both;
+  animation: opacityAnimation 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 .login-icon {
@@ -183,6 +186,9 @@
     height: 87%;
     max-height: 785px;
     object-fit: contain;
+    -webkit-animation: opacityAnimation 0.5s cubic-bezier(0.39, 0.575, 0.565, 1)
+      both;
+    animation: opacityAnimation 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   }
 
   .login-glass {
@@ -207,6 +213,9 @@
     flex-direction: column;
     color: #fff;
     position: relative;
+    -webkit-animation: opacityAnimation 1s cubic-bezier(0.39, 0.575, 0.565, 1)
+      both;
+    animation: opacityAnimation 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   }
 
   .login-circle:nth-child(1) {
@@ -245,6 +254,7 @@
     background-color: #bdbdbd;
     padding: 3px;
     border-radius: 50%;
+    -webkit-animation: animationLoginCircle 1.6s ease-out infinite;
     animation: animationLoginCircle 1.6s ease-out infinite;
   }
 
@@ -294,5 +304,9 @@
     padding: 3.5rem 0;
     margin: auto;
     height: 100%;
+    -webkit-animation: opacityAnimation 1s cubic-bezier(0.39, 0.575, 0.565, 1)
+      0.15s both;
+    animation: opacityAnimation 1s cubic-bezier(0.39, 0.575, 0.565, 1) 0.15s
+      both;
   }
 }

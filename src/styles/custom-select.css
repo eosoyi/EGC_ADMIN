@@ -1,0 +1,53 @@
+.container-custom-select {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.container-custom-select > label {
+  font-weight: 500;
+  font-size: clamp(13.3px, 2.7vw, 0.85rem);
+}
+
+.custom-select {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.custom-select > select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 11px 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #f9fafb;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  color: #000000;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 0px 1px 0px #e2e2e2;
+}
+
+.custom-select > select:focus {
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 10px;
+}
+
+.custom-select::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  top: 50%;
+  right: 20px;
+  transform: translate(0, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: #000000;
+  clip-path: polygon(8% 17%, 0% 25%, 50% 84%, 100% 25%, 92% 17%, 50% 65%);
+}

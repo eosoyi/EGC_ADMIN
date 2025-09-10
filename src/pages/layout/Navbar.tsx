@@ -3,8 +3,10 @@ import { FaAlignJustify, FaTimes, FaUser } from "react-icons/fa";
 import { FaRightToBracket } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import { routes } from "../../router/routes";
+import { useAuthStore } from "../../hooks/useAuthStore";
 
 export const Navbar = () => {
+  const { startLogout } = useAuthStore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <>
@@ -56,7 +58,7 @@ export const Navbar = () => {
 
         {/* Logout fijo abajo */}
         <div className="logout">
-          <button type="button" className="logout-btn">
+          <button type="button" className="logout-btn" onClick={startLogout}>
             <FaRightToBracket className="icon" />
             <span className="text">Cerrar sesión</span>
           </button>

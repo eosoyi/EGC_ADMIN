@@ -2,7 +2,8 @@
 
 :root {
   --tasa-font: "TASA Explorer", sans-serif;
-  --page-color: #F9FAFB;
+  --page-color: #f9fafb;
+  --color-gray: #e2e2e2;
 }
 
 * {
@@ -34,4 +35,15 @@ textarea {
 
 a {
   text-decoration: none;
+}
+
+@keyframes opacityAnimation {
+  from {
+    opacity: 0;
+    scale: 0;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 }

@@ -8,6 +8,8 @@ import {
 import "./styles/member-page.css";
 import ComboboxData from "../../interfaces/ComboboxData";
 import { FaPenToSquare } from "react-icons/fa6";
+import { useEffect, useState } from "react";
+import { MemberModal } from "./components/MemberModal";
 
 const establishmentData: ComboboxData[] = [
   {
@@ -96,8 +98,23 @@ const users = Array.from({ length: 10 }, (_, i) => ({
 }));
 
 export const MemberPage = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (openModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openModal]);
+
   return (
     <>
+      {openModal && <MemberModal onClose={() => setOpenModal(false)} />}
       <div className="member-page-main-container">
         <div className="member-page-header">
           <div className="member-page-header-content">
@@ -109,7 +126,11 @@ export const MemberPage = () => {
               <p>Total de usuarios</p>
               <span>15</span>
             </div>
-            <button type="button" className="member-page-add-button">
+            <button
+              type="button"
+              className="member-page-add-button"
+              onClick={() => setOpenModal(true)}
+            >
               <FaPlus />
               Nuevo
             </button>

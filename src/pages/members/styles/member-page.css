@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  position: relative;
 }
 
 .member-page-header {
@@ -127,9 +128,6 @@
   display: grid;
   grid-template-columns: 1fr; /* 📱 por defecto en móvil → columna */
   gap: 1rem;
-  /* display: flex;
-  flex-direction: column;
-  gap: 1rem; */
 }
 
 .member-page-container-custom-select {
@@ -261,7 +259,7 @@
 .cell-squad {
   color: #000000;
   font-weight: 500;
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   padding: 7px 15px;
   border-radius: 25px;
 }
