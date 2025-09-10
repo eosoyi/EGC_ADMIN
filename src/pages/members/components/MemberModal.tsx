@@ -1,9 +1,12 @@
 import { FaQrcode, FaTimes } from "react-icons/fa";
-import "../styles/member-modal.css";
-import { CustomInput } from "../../components/CustomInput";
-import ComboboxData from "../../../interfaces/ComboboxData";
-import { CustomSelect } from "../../components/CustomSelect";
 import { FaFloppyDisk, FaXmark } from "react-icons/fa6";
+import { CustomInput } from "../../components/CustomInput";
+import { CustomSelect } from "../../components/CustomSelect";
+import ComboboxData from "../../../interfaces/ComboboxData";
+import "../styles/member-modal.css";
+import { useForm } from "../../../hooks/useForm";
+import Member from "../../../interfaces/Member";
+import { FormEvent, useState } from "react";
 
 interface Props {
   onClose: () => void;
@@ -139,6 +142,92 @@ const isNewData: ComboboxData[] = [
 ];
 
 export const MemberModal = ({ onClose }: Props) => {
+  const { formData, onChange, onSelectChange } = useForm<Member>({
+    idIntegrante: 0,
+    nombres: "",
+    apellidos: "",
+    edad: 1,
+    telefono: "",
+    idEstablecimiento: 0,
+    establecimientoNombre: "",
+    idCarrera: 0,
+    carreraNombre: "",
+    idGrado: 0,
+    gradoNombre: "",
+    seccion: "",
+    idEscuadra: 0,
+    idPuesto: 0,
+    esNuevo: 1,
+    usuario: "",
+    estadoIntegrante: 1,
+    nombreEncargado: "",
+    telefonoEncargado: "",
+  });
+
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [showOtherEstablishment, setShowOtherEstablishment] =
+    useState<boolean>(false);
+  const [showOtherCareer, setShowOtherCareer] = useState<boolean>(false);
+  const [showOtherDegree, setShowOtherDegree] = useState<boolean>(false);
+
+  const handleInsertOrUpdate = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const newErrors: { [key: string]: string } = {};
+
+    if (!formData.nombres.trim()) {
+      newErrors.nombres = "El nombre es obligatorio";
+    }
+
+    if (!formData.apellidos.trim()) {
+      newErrors.apellidos = "El apellido es obligatorio";
+    }
+
+    if (!formData.telefono.trim()) {
+      newErrors.telefono = "El teléfono es obligatorio";
+    }
+
+    // TODO: Esto debe cambiar cuando ya conecte con DB
+    if (formData.idEstablecimiento === 0)
+      newErrors.idEstablecimiento = "Seleccione un establecimiento";
+
+    if (
+      formData.idEstablecimiento === 3 &&
+      !formData.establecimientoNombre?.trim()
+    )
+      newErrors.establecimientoNombre = "El establecimiento es obligatorio";
+
+    if (formData.idCarrera === 0)
+      newErrors.idCarrera = "Seleccione una carrera";
+
+    if (formData.idCarrera === 5 && !formData.carreraNombre?.trim())
+      newErrors.carreraNombre = "El nombre de la carrera es obligatoria";
+
+    if (formData.idGrado === 0) newErrors.idGrado = "Seleccione un grado";
+
+    if (formData.idGrado === 7 && !formData.gradoNombre?.trim())
+      newErrors.gradoNombre = "El nombre del grado es obligatorio";
+
+    if (!formData.seccion.trim()) {
+      newErrors.seccion = "La seccion es obligatoria";
+    }
+
+    if (!formData.nombreEncargado.trim()) {
+      newErrors.nombreEncargado = "El nombre del encargado es obligatorio";
+    }
+
+    if (!formData.telefonoEncargado.trim()) {
+      newErrors.telefonoEncargado = "El teléfono del encargado es obligatorio";
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      return;
+    }
+
+    console.log(formData);
+  };
+
   return (
     <>
       <div className="container-main-member-modal">
@@ -148,7 +237,11 @@ export const MemberModal = ({ onClose }: Props) => {
             <FaTimes className="icon" onClick={onClose} />
           </div>
 
-          <form method="POST" className="form-member-modal">
+          <form
+            method="POST"
+            className="form-member-modal"
+            onSubmit={handleInsertOrUpdate}
+          >
             <div className="form-header-member-modal">
               <div className="personal-info-member-modal">
                 <div className="qr-content-member-modal">
@@ -158,21 +251,44 @@ export const MemberModal = ({ onClose }: Props) => {
                 <div className="personal-inputs-member-modal">
                   <span>Información Personal</span>
                   <div className="container-input-member-modal">
-                    <CustomInput name="names" label="Nombres" request />
-                  </div>
-                  <div className="container-input-member-modal">
-                    <CustomInput name="lastname" label="Apellidos" request />
-                  </div>
-                  <div className="container-input-member-modal">
                     <CustomInput
-                      name="yearsOld"
-                      label="Edad"
-                      type="number"
+                      name="nombres"
+                      label="Nombres"
                       request
+                      value={formData.nombres}
+                      onChange={onChange}
+                      errorMessage={errors.nombres}
                     />
                   </div>
                   <div className="container-input-member-modal">
-                    <CustomInput name="tel" label="Teléfono" request />
+                    <CustomInput
+                      name="apellidos"
+                      label="Apellidos"
+                      request
+                      value={formData.apellidos}
+                      onChange={onChange}
+                      errorMessage={errors.apellidos}
+                    />
+                  </div>
+                  <div className="container-input-member-modal">
+                    <CustomInput
+                      name="edad"
+                      label="Edad"
+                      type="number"
+                      request
+                      value={formData.edad!.toString()}
+                      onChange={onChange}
+                    />
+                  </div>
+                  <div className="container-input-member-modal">
+                    <CustomInput
+                      name="telefono"
+                      label="Teléfono"
+                      request
+                      value={formData.telefono}
+                      onChange={onChange}
+                      errorMessage={errors.telefono}
+                    />
                   </div>
                 </div>
               </div>
@@ -185,53 +301,97 @@ export const MemberModal = ({ onClose }: Props) => {
                       <div className="container-input-member-modal">
                         <CustomSelect
                           dataList={establishmentData}
-                          name="Establecimiento"
+                          name="idEstablecimiento"
                           label="Establecimiento"
                           initValue
                           request
+                          value={formData.idEstablecimiento}
+                          onChange={(e) => {
+                            console.log(e.target.value);
+                            onSelectChange(e);
+                            setShowOtherEstablishment(
+                              Number(e.target.value) === 3
+                            );
+                          }}
+                          errorMessage={errors.idEstablecimiento}
                         />
                       </div>
-                      <div className="container-input-member-modal">
-                        <CustomInput
-                          name="lastname"
-                          label="Nombre establecimiento"
-                          request
-                        />
-                      </div>
+                      {showOtherEstablishment && (
+                        <div className="container-input-member-modal">
+                          <CustomInput
+                            name="establecimientoNombre"
+                            label="Nombre establecimiento"
+                            request
+                            value={formData.establecimientoNombre!}
+                            onChange={onChange}
+                            errorMessage={errors.establecimientoNombre}
+                          />
+                        </div>
+                      )}
+
                       <div className="container-input-member-modal">
                         <CustomSelect
                           dataList={careersData}
-                          name="career"
+                          name="idCarrera"
                           label="Carrera"
                           initValue
                           request
+                          value={formData.idCarrera}
+                          onChange={(e) => {
+                            onSelectChange(e);
+                            setShowOtherCareer(Number(e.target.value) === 5);
+                          }}
+                          errorMessage={errors.idCarrera}
                         />
                       </div>
-                      <div className="container-input-member-modal">
-                        <CustomInput
-                          name="lastname"
-                          label="Nombre carrera"
-                          request
-                        />
-                      </div>
+                      {showOtherCareer && (
+                        <div className="container-input-member-modal">
+                          <CustomInput
+                            name="carreraNombre"
+                            label="Nombre carrera"
+                            request
+                            value={formData.carreraNombre!}
+                            onChange={onChange}
+                            errorMessage={errors.carreraNombre}
+                          />
+                        </div>
+                      )}
                       <div className="container-input-member-modal">
                         <CustomSelect
                           dataList={degrees}
-                          name="degrees"
+                          name="idGrado"
                           label="Grado"
                           initValue
                           request
+                          value={formData.idGrado}
+                          onChange={(e) => {
+                            onSelectChange(e);
+                            setShowOtherDegree(Number(e.target.value) === 7);
+                          }}
+                          errorMessage={errors.idGrado}
                         />
                       </div>
+                      {showOtherDegree && (
+                        <div className="container-input-member-modal">
+                          <CustomInput
+                            name="gradoNombre"
+                            label="Nombre grado"
+                            request
+                            value={formData.gradoNombre!}
+                            onChange={onChange}
+                            errorMessage={errors.gradoNombre}
+                          />
+                        </div>
+                      )}
                       <div className="container-input-member-modal">
                         <CustomInput
-                          name="lastname"
-                          label="Nombre grado"
+                          name="seccion"
+                          label="Sección"
                           request
+                          value={formData.seccion!}
+                          onChange={onChange}
+                          errorMessage={errors.seccion}
                         />
-                      </div>
-                      <div className="container-input-member-modal">
-                        <CustomInput name="lastname" label="Sección" request />
                       </div>
                     </div>
                   </div>
@@ -245,38 +405,53 @@ export const MemberModal = ({ onClose }: Props) => {
                       <div className="container-input-member-modal">
                         <CustomSelect
                           dataList={squadData}
-                          name="squad"
+                          name="idEscuadra"
                           label="Escuadra"
                           initValue
                           request
+                          onChange={onSelectChange}
+                          value={formData.idEscuadra}
                         />
                       </div>
                       <div className="container-input-member-modal">
                         <CustomSelect
                           dataList={positionData}
-                          name="position"
+                          name="idPuesto"
                           label="Puesto"
                           initValue
                           request
+                          onChange={onSelectChange}
+                          value={formData.idPuesto}
                         />
                       </div>
                       <div className="container-input-member-modal">
                         <CustomSelect
                           dataList={isNewData}
-                          name="isNew"
+                          name="esNuevo"
                           label="¿Es nuevo integrante?"
                           request
+                          onChange={onSelectChange}
+                          value={formData.esNuevo}
                         />
                       </div>
                       <div className="container-input-member-modal">
-                        <CustomInput name="lastname" label="Usuario" request />
+                        <CustomInput
+                          name="usuario"
+                          label="Usuario"
+                          disabled
+                          value={formData.usuario!}
+                          onChange={onChange}
+                        />
                       </div>
                       <div className="container-input-member-modal">
                         <CustomSelect
                           dataList={states}
-                          name="state"
+                          name="estadoIntegrante"
                           label="Estado"
                           request
+                          disabled
+                          onChange={onSelectChange}
+                          value={formData.estadoIntegrante}
                         />
                       </div>
                     </div>
@@ -289,16 +464,22 @@ export const MemberModal = ({ onClose }: Props) => {
                     <div className="inputs-grid">
                       <div className="container-input-member-modal">
                         <CustomInput
-                          name="lastname"
+                          name="nombreEncargado"
                           label="Nombre del encargado"
                           request
+                          value={formData.nombreEncargado!}
+                          onChange={onChange}
+                          errorMessage={errors.nombreEncargado}
                         />
                       </div>
                       <div className="container-input-member-modal">
                         <CustomInput
-                          name="lastname"
+                          name="telefonoEncargado"
                           label="Teléfono del encargado"
                           request
+                          value={formData.telefonoEncargado!}
+                          onChange={onChange}
+                          errorMessage={errors.telefonoEncargado}
                         />
                       </div>
                     </div>
@@ -307,7 +488,7 @@ export const MemberModal = ({ onClose }: Props) => {
               </div>
             </div>
             <div className="form-footer-member-modal">
-              <button type="button">
+              <button type="button" onClick={onClose}>
                 <FaXmark />
                 Cancelar
               </button>

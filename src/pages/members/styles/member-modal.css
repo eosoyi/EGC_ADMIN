@@ -141,7 +141,6 @@
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  scale: 1;
 }
 
 .form-footer-member-modal > button:nth-child(1) {
@@ -156,8 +155,12 @@
   color: #fff;
 }
 
-.form-footer-member-modal > button:hover {
-  scale: 1.02;
+.form-footer-member-modal > button:nth-child(1):hover {
+  box-shadow: 0 0 8px 5px #e6e6e6;
+}
+
+.form-footer-member-modal > button:nth-child(2):hover {
+  box-shadow: 0 0 8px 5px #706f6fe0;
 }
 
 @media screen and (min-width: 768px) {
