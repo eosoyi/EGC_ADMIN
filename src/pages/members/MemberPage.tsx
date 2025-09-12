@@ -10,6 +10,7 @@ import ComboboxData from "../../interfaces/ComboboxData";
 import { FaPenToSquare } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { MemberModal } from "./components/MemberModal";
+import { CancelMemberModal } from "./components/CancelMemberModal";
 
 const establishmentData: ComboboxData[] = [
   {
@@ -87,6 +88,21 @@ const positionData: ComboboxData[] = [
   },
 ];
 
+const stateData: ComboboxData[] = [
+  {
+    id: 0,
+    value: "Todos",
+  },
+  {
+    id: 1,
+    value: "Nuevo",
+  },
+  {
+    id: 2,
+    value: "Antiguo",
+  },
+];
+
 const users = Array.from({ length: 10 }, (_, i) => ({
   id: i + 1,
   nombre: `Usuario ${i + 1}`,
@@ -99,6 +115,7 @@ const users = Array.from({ length: 10 }, (_, i) => ({
 
 export const MemberPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openCancelModal, setOpenCancelModal] = useState<boolean>(false);
 
   useEffect(() => {
     if (openModal) {
@@ -112,9 +129,24 @@ export const MemberPage = () => {
     };
   }, [openModal]);
 
+  useEffect(() => {
+    if (openCancelModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openCancelModal]);
+
   return (
     <>
       {openModal && <MemberModal onClose={() => setOpenModal(false)} />}
+      {openCancelModal && (
+        <CancelMemberModal onClose={() => setOpenCancelModal(false)} />
+      )}
       <div className="member-page-main-container">
         <div className="member-page-header">
           <div className="member-page-header-content">
@@ -204,6 +236,18 @@ export const MemberPage = () => {
                 <div className="member-page-select-arrow"></div>
               </div>
             </div>
+
+            <div className="member-page-container-custom-select">
+              <label>Estado</label>
+              <div className="member-page-custom-select">
+                <select>
+                  {stateData.map((item) => (
+                    <option key={item.id}>{item.value}</option>
+                  ))}
+                </select>
+                <div className="member-page-select-arrow"></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -247,14 +291,17 @@ export const MemberPage = () => {
                   <div className="action-menu">
                     <button className="action-btn">⋮</button>
                     <div className="dropdown">
-                      <button>
+                      <button type="button">
                         <FaPenToSquare /> Editar
                       </button>
-                      <button>
+                      <button type="button">
                         <FaDownload /> Descargar QR
                       </button>
-                      <button>
-                        <FaTrash /> Eliminar
+                      <button
+                        type="button"
+                        onClick={() => setOpenCancelModal(true)}
+                      >
+                        <FaTrash /> Dar baja
                       </button>
                     </div>
                   </div>

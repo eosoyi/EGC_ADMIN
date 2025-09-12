@@ -7,6 +7,7 @@ import "../styles/member-modal.css";
 import { useForm } from "../../../hooks/useForm";
 import Member from "../../../interfaces/Member";
 import { FormEvent, useState } from "react";
+import { QRComponent } from "../../components/QRComponent";
 
 interface Props {
   onClose: () => void;
@@ -246,7 +247,8 @@ export const MemberModal = ({ onClose }: Props) => {
               <div className="personal-info-member-modal">
                 <div className="qr-content-member-modal">
                   <span>Código QR</span>
-                  <FaQrcode className="icon" />
+                  {/* <FaQrcode className="icon" /> */}
+                  <QRComponent data="100" />
                 </div>
                 <div className="personal-inputs-member-modal">
                   <span>Información Personal</span>

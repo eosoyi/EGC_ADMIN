@@ -304,10 +304,21 @@
   text-align: left;
   cursor: pointer;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .dropdown button:hover {
-  background: #f3f4f6;
+  background-color: #f3f4f6;
+}
+
+.dropdown button:nth-child(3) {
+  color: #c62828;
+}
+
+.dropdown button:nth-child(3):hover {
+  background-color: #ffcdd2;
 }
 
 /* Mostrar dropdown en hover */
@@ -385,7 +396,7 @@
   }
 
   .member-page-combobox-filter {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .cell {
