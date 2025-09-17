@@ -77,101 +77,16 @@
   gap: 1rem;
 }
 
-/* estilos para el input */
-.member-page-custom-input {
-  display: flex;
-  align-items: center;
-  position: relative;
+.content-search-member-page {
   width: 100%;
   max-width: 550px;
-}
-
-.member-page-input {
-  font-size: 16px;
-  padding: 10px 12px;
-  width: 100%;
-  padding-left: 42px;
-  outline: none;
-  background: #ffffff;
-  color: #000000;
-  border: 1px solid #dcdcdc;
-  border-radius: 10px;
-  box-shadow: 0px 0px 1px 0px #e2e2e2;
-  transition: 0.3s ease;
-}
-
-.member-page-input:focus {
-  background: #ffffff;
-  border: 1px solid #dcdcdc;
-  border-radius: 12px;
-  box-shadow: 0px 0px 1px 4px #e2e2e2;
-}
-
-.member-page-input::placeholder {
-  color: #999999;
-}
-
-.member-page-svg_icon {
-  position: absolute;
-  left: 16px;
-  fill: #999999;
-  width: 16px;
-  height: 16px;
-}
-
-/* estilos para los select */
-.member-page-custom-select {
-  position: relative;
+  
 }
 
 .member-page-combobox-filter {
   display: grid;
   grid-template-columns: 1fr; /* 📱 por defecto en móvil → columna */
   gap: 1rem;
-}
-
-.member-page-container-custom-select {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.member-page-container-custom-select > label {
-  font-size: clamp(0.9rem, 1vw, 1rem);
-}
-
-.member-page-custom-select select {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  font-size: 16px;
-  padding: 10px 20px 10px 20px;
-  background-color: #f9fafb;
-  border: 1px solid #dcdcdc;
-  border-radius: 10px;
-  color: #000000;
-  cursor: pointer;
-  outline: none;
-  box-shadow: 0px 0px 2px 0px #e2e2e2;
-}
-
-.member-page-custom-select select:focus {
-  background: #ffffff;
-  border: 1px solid #000000;
-  border-radius: 10px;
-}
-
-.member-page-custom-select::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  top: 50%;
-  right: 20px;
-  transform: translate(0, -50%);
-  width: 14px;
-  height: 14px;
-  background-color: #000000;
-  clip-path: polygon(8% 17%, 0% 25%, 50% 84%, 100% 25%, 92% 17%, 50% 65%);
 }
 
 /* tabla */

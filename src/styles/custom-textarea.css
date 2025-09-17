@@ -14,8 +14,8 @@
   padding: 10px 12px;
   min-width: 100%;
   max-width: 100%;
-  min-height: 100%;
-  max-height: 100%;
+  min-height: 120px;
+  max-height: 120px;
   outline: none;
   background-color: #fff;
   color: #000000;
@@ -23,6 +23,10 @@
   border-radius: 10px;
   box-shadow: 0px 0px 1px 0px #e2e2e2;
   transition: 0.3s ease;
+}
+
+.custom-textarea > textarea.error {
+  border: 1px solid #d93025;
 }
 
 .custom-textarea > textarea:focus {

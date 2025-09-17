@@ -50,7 +50,7 @@
 }
 
 .custom-input.has-error input {
-  border: 1px solid #d93025; /* rojo para error */
+  border: 1px solid #d93025;
 }
 
 .custom-input-error {

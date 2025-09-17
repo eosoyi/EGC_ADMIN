@@ -3,6 +3,7 @@ import {
   FaArrowRight,
   FaDownload,
   FaPlus,
+  FaSearch,
   FaTrash,
 } from "react-icons/fa";
 import "./styles/member-page.css";
@@ -11,6 +12,8 @@ import { FaPenToSquare } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { MemberModal } from "./components/MemberModal";
 import { CancelMemberModal } from "./components/CancelMemberModal";
+import { CustomInput } from "../components/CustomInput";
+import { CustomSelect } from "../components/CustomSelect";
 
 const establishmentData: ComboboxData[] = [
   {
@@ -170,18 +173,13 @@ export const MemberPage = () => {
         </div>
 
         <div className="member-page-filter-container">
-          <div className="member-page-custom-input">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="member-page-svg_icon bi-search"
-              viewBox="0 0 16 16"
-            >
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-            </svg>
-            <input
-              className="member-page-input"
+          <div className="content-search-member-page">
+            <CustomInput
+              name="search"
+              value=""
               type="search"
               placeholder="Buscar por nombre"
+              icon={<FaSearch />}
             />
           </div>
         </div>
@@ -189,65 +187,40 @@ export const MemberPage = () => {
         <div className="member-page-filter-container">
           <strong>Filtros</strong>
           <div className="member-page-combobox-filter">
-            <div className="member-page-container-custom-select">
-              <label>Establecimiento</label>
-              <div className="member-page-custom-select">
-                <select>
-                  {establishmentData.map((item) => (
-                    <option key={item.id}>{item.value}</option>
-                  ))}
-                </select>
-                <div className="member-page-select-arrow"></div>
-              </div>
-            </div>
+            <CustomSelect
+              dataList={establishmentData}
+              name="establecimiento"
+              initValue
+              label="Establecimiento"
+            />
 
-            <div className="member-page-container-custom-select">
-              <label>Carrera</label>
-              <div className="member-page-custom-select">
-                <select>
-                  {careersData.map((item) => (
-                    <option key={item.id}>{item.value}</option>
-                  ))}
-                </select>
-                <div className="member-page-select-arrow"></div>
-              </div>
-            </div>
+            <CustomSelect
+              dataList={careersData}
+              name="establecimiento"
+              initValue
+              label="Carrera"
+            />
 
-            <div className="member-page-container-custom-select">
-              <label>Escuadra</label>
-              <div className="member-page-custom-select">
-                <select>
-                  {squadData.map((item) => (
-                    <option key={item.id}>{item.value}</option>
-                  ))}
-                </select>
-                <div className="member-page-select-arrow"></div>
-              </div>
-            </div>
+            <CustomSelect
+              dataList={squadData}
+              name="establecimiento"
+              initValue
+              label="Escuadra"
+            />
 
-            <div className="member-page-container-custom-select">
-              <label>Puesto</label>
-              <div className="member-page-custom-select">
-                <select>
-                  {positionData.map((item) => (
-                    <option key={item.id}>{item.value}</option>
-                  ))}
-                </select>
-                <div className="member-page-select-arrow"></div>
-              </div>
-            </div>
+            <CustomSelect
+              label="Puesto"
+              dataList={positionData}
+              name="establecimiento"
+              initValue
+            />
 
-            <div className="member-page-container-custom-select">
-              <label>Estado</label>
-              <div className="member-page-custom-select">
-                <select>
-                  {stateData.map((item) => (
-                    <option key={item.id}>{item.value}</option>
-                  ))}
-                </select>
-                <div className="member-page-select-arrow"></div>
-              </div>
-            </div>
+            <CustomSelect
+              label="Estado"
+              dataList={stateData}
+              name="establecimiento"
+              initValue
+            />
           </div>
         </div>
 
