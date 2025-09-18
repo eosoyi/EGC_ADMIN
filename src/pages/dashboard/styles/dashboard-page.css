@@ -23,12 +23,12 @@
 }
 
 .dashboard-page-header-content > strong {
-  font-size: clamp(1.7rem, 2.3vw, 2.3rem);
+  font-size: clamp(1.7rem, 1.9vw, 1.9rem);
   font-style: italic;
 }
 
 .dashboard-page-header-content > p {
-  font-size: clamp(15px, 1.3vw, 1.3rem);
+  font-size: clamp(15px, 1.05vw, 1rem);
 }
 
 .dashboard-page-general-acount {
@@ -66,9 +66,63 @@
   gap: 1rem;
 }
 
+.dashboard-page-chart-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dashboard-page-chart-bar-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-page-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 📱 en móvil: 2 columnas */
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.dashboard-page-summary-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-page-summary-card:nth-child(1) {
+  background-color: #eff6ff;
+  color: #155dfc;
+}
+
+.dashboard-page-summary-card:nth-child(2) {
+  background-color: #f0fdf4;
+  color: #00a656;
+}
+
+.dashboard-page-summary-card:nth-child(3) {
+  background-color: #faf5ff;
+  color: #9810fa;
+}
+
+.dashboard-page-summary-card .number {
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  font-weight: bold;
+}
+
+.dashboard-page-summary-card .title {
+  font-size: clamp(0.9rem, 2vw, 0.9rem);
+  margin-top: 0.5rem;
+}
+
 @media screen and (min-width: 768px) {
   .dashboard-page-header {
-    padding: 1.3rem 1.6rem;
+    padding: 1.6rem 1.6rem;
     flex-direction: row;
     justify-content: space-between;
     gap: 20px;
@@ -86,5 +140,20 @@
 @media screen and (min-width: 1024px) {
   .dashboard-page-combobox-filter {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .dashboard-page-chart-content {
+    margin-top: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .dashboard-page-chart-bar-content {
+    display: flex;
+  }
+
+  .dashboard-page-summary-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
