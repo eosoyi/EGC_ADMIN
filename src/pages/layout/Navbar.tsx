@@ -48,7 +48,12 @@ export const Navbar = () => {
 
           <nav className="menu-items">
             {routes.map((route) => (
-              <NavLink key={route.name} to={route.to} className="menu-link">
+              <NavLink
+                key={route.name}
+                to={route.to}
+                className="menu-link"
+                onClick={() => setIsOpen(false)}
+              >
                 {route.icon}
                 <span className="text">{route.name}</span>
               </NavLink>

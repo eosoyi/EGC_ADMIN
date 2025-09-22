@@ -5,6 +5,7 @@ import { Login } from "../pages/login/Login";
 import { Menu } from "../pages/layout/Menu";
 import { MemberPage } from "../pages/members/MemberPage";
 import { DashboardPage } from "../pages/dashboard/DashboardPage";
+import { ProfilePage } from "../pages/profile/ProfilePage";
 
 export const AppRouter = () => {
   const { status, checkAuthToken } = useAuthStore();
@@ -29,6 +30,7 @@ export const AppRouter = () => {
           <Route path="/" element={<Menu />}>
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="usuarios" element={<MemberPage />} />
+            <Route path="profile" element={<ProfilePage />} />
             <Route path="/*" element={<Navigate to="/dashboard" />} />
           </Route>
         </>
