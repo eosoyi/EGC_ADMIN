@@ -3,10 +3,17 @@ import { FaSave, FaTh, FaUserAlt, FaUsers } from "react-icons/fa";
 import { CustomInput } from "../components/CustomInput";
 import { CustomSelect } from "../components/CustomSelect";
 import "./styles/profile-page.css";
+import { useState } from "react";
+import { ChangePasswordModal } from "./components/ChangePasswordModal";
 
 export const ProfilePage = () => {
+  const [changePasswordModal, setChangePasswordModal] =
+    useState<boolean>(false);
   return (
     <>
+      {changePasswordModal && (
+        <ChangePasswordModal onClose={() => setChangePasswordModal(false)} />
+      )}
       <div className="profile-page-main-container">
         <div className="profile-page-header">
           <FaUser className="icon" />
@@ -136,6 +143,7 @@ export const ProfilePage = () => {
                   <button
                     type="button"
                     className="profile-page-button-change-password"
+                    onClick={() => setChangePasswordModal(true)}
                   >
                     <FaShield />
                     Cambiar contraseña
