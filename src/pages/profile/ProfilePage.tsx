@@ -3,12 +3,21 @@ import { FaSave, FaTh, FaUserAlt, FaUsers } from "react-icons/fa";
 import { CustomInput } from "../components/CustomInput";
 import { CustomSelect } from "../components/CustomSelect";
 import "./styles/profile-page.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChangePasswordModal } from "./components/ChangePasswordModal";
+import { useLocation } from "react-router-dom";
 
 export const ProfilePage = () => {
+  const location = useLocation();
   const [changePasswordModal, setChangePasswordModal] =
     useState<boolean>(false);
+
+  useEffect(() => {
+    if (location.state?.reload) {
+      console.log("refrescando datos ...");
+    }
+  }, [location.state]);
+
   return (
     <>
       {changePasswordModal && (

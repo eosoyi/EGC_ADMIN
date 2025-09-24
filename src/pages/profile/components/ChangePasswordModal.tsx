@@ -5,6 +5,7 @@ import "../styles/change-password-modal.css";
 import { useForm } from "../../../hooks/useForm";
 import { FormEvent, useState } from "react";
 import Utils from "../../../utils/Utils";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   onClose: () => void;
@@ -16,6 +17,7 @@ interface FormData {
 }
 
 export const ChangePasswordModal = ({ onClose }: Props) => {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const { onChange, formData } = useForm<FormData>({
     newPassword: "",
@@ -60,6 +62,7 @@ export const ChangePasswordModal = ({ onClose }: Props) => {
     }
 
     console.log(formData);
+    navigate("/profile", { state: { reload: true }});
   };
 
   return (
